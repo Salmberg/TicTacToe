@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -17,6 +18,7 @@ public class TicTacToe {
             System.out.println("2.Player one is X, player two is is O. Players take turns putting their marks in empty squares (1-9)");
             System.out.println("3.The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.");
             System.out.println("4.When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.");
+            System.out.println("If you want to play against the computer, enter \"Cpu\" instead of player 2");
             System.out.println("<===============================>");
 
 
@@ -73,19 +75,21 @@ public class TicTacToe {
         boolean whileInvalid = true;
         int pos = 0;
 
-        System.out.print(player + " make your draw (1-9):");
-        while (whileInvalid) {
-            String pos1candidate = sc.nextLine(); //Input of player 1 move
 
-            try {
-                pos = Integer.parseInt(pos1candidate);
-                break;
 
-            } catch (NumberFormatException e) {
+            System.out.print(player + " make your draw (1-9):");
+            while (whileInvalid) {
+                String pos1candidate = sc.nextLine(); //Input of player 1 move
 
-                System.out.println("Invalid Symbol, try again! (1-9):");
+                try {
+                    pos = Integer.parseInt(pos1candidate);
+                    break;
+
+                } catch (NumberFormatException e) {
+
+                    System.out.println("Invalid Symbol, try again! (1-9):");
+                }
             }
-        }
         return pos;
     }
 }
