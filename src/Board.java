@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Board {
 
@@ -26,10 +27,6 @@ public class Board {
             System.out.println();
         }
     }
-
-//    public boolean isValidPosition(int selectPos, String symbol){
-//        return playingBoard[0][selectPos].equals(symbol);
-//    }
 
     public char getPosition(int selectPos) {
         switch (selectPos) {
@@ -66,42 +63,49 @@ public class Board {
         }
     }
 
-    public void placeYourDraw(int pos, String user) { //This is the method that lets the player place their "X" or "O".
+    public void placeYourDraw(Player player) { //This is the method that lets the player place their "X" or "O".
 
+        Scanner sc = new Scanner(System.in);
         char symbol = ' ';
-        char getCurrentPositionChar = getPosition(pos);
 
-
-        if (user.equals("player1")) {
+        if (player.id.equals("X")) {
             symbol = 'X';
-        } else if (user.equals("player2")) {
+        } else if (player.id.equals("O")) {
             symbol = 'O';
         }
-        if (Character.toString(getCurrentPositionChar).equals(" ")) { //Om den är tom går det att placera in X/O
+        boolean isOccupide = true;
+        while (isOccupide) {
 
-            //Lägger till X/O
-            if (user.equals("player1")) {
-                p1Pos.add(pos);
-            } else if (user.equals("player2")) {
-                p2Pos.add(pos);
-            }
+            int position = TicTacToe.getValidPosition(sc, player.name); //Verifierar att användaren skriver in en siffra.
+            char getCurrentPositionChar = getPosition(position); //Kollar om positionen är tom
+            if (Character.toString(getCurrentPositionChar).equals(" ")) { //Om den är tom går det att placera in X/O
 
-            //Placerar in X/O på respektive plats
-            switch (pos) {
-                case 1 -> playingBoard[0][0] = symbol;
-                case 2 -> playingBoard[0][2] = symbol;
-                case 3 -> playingBoard[0][4] = symbol;
-                case 4 -> playingBoard[2][0] = symbol;
-                case 5 -> playingBoard[2][2] = symbol;
-                case 6 -> playingBoard[2][4] = symbol;
-                case 7 -> playingBoard[4][0] = symbol;
-                case 8 -> playingBoard[4][2] = symbol;
-                case 9 -> playingBoard[4][4] = symbol;
-                default -> {
+                //Lägger till X/O
+                if (player.id.equals("X")) {
+                    p1Pos.add(position);
+                } else if (player.id.equals("O")) {
+                    p2Pos.add(position);
                 }
+
+                //Placerar in X/O på respektive plats
+                switch (position) {
+                    case 1 -> playingBoard[0][0] = symbol;
+                    case 2 -> playingBoard[0][2] = symbol;
+                    case 3 -> playingBoard[0][4] = symbol;
+                    case 4 -> playingBoard[2][0] = symbol;
+                    case 5 -> playingBoard[2][2] = symbol;
+                    case 6 -> playingBoard[2][4] = symbol;
+                    case 7 -> playingBoard[4][0] = symbol;
+                    case 8 -> playingBoard[4][2] = symbol;
+                    case 9 -> playingBoard[4][4] = symbol;
+                    default -> {
+                    }
+                }
+                break;
+            } else {
+                System.out.println("Already taken, try again!:");
+
             }
-        } else {
-            System.out.println("Already taken, try again!:");//return false/true
         }
     }
 

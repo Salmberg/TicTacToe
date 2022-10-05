@@ -20,11 +20,15 @@ public class TicTacToe {
             System.out.println("<===============================>");
 
 
-            Scanner sc = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);   //Denna låter använder skriva in ett namn och "setta" det.
             System.out.println("Player 1 (X), enter your name: ");
-            String p1 = sc.nextLine();
+            Player p1 = new Player();
+            p1.setName(sc.nextLine()); //Denna låter användaren "setta" namnet.
+            p1.setId("X"); // Denna "settar" id 1 till "X". Detta sätter vi och inte användaren.
             System.out.println("Player 2 (O), enter your name: ");
-            String p2 = sc.nextLine();
+            Player p2 = new Player();
+            p2.setName(sc.nextLine());
+            p2.setId("O");
 
 
             board.printOutPlayingBoard(); //This one is calling in the method "PrintOutPlayingBoard"
@@ -34,17 +38,11 @@ public class TicTacToe {
 
             while (!exitWhileLoop) {
 
-                //System.out.print(player + " make your draw (1-9):");
-                //Här vill jag ha en while loop som kör så länge pos är invalid och positionen är upptagen.
-                int pos1 = getValidPosition(sc, p1); //kallar på metoden getValidPosition
 
-
-                System.out.println(pos1);
-
-                board.placeYourDraw(pos1, "player1");// Prints out the playingboard + the chosen position of "X".
+                board.placeYourDraw(p1);// Prints out the playingboard + the chosen position of "X".
                 board.printOutPlayingBoard();
 
-                String result = board.checkWinner(p1, p2);
+                String result = board.checkWinner(p1.name, p2.name);
 
 
                 if (result.length() > 0) { //Om detta är sant så sätts boolen till true och då ska while-loopen sluta
@@ -54,15 +52,10 @@ public class TicTacToe {
 
                 //----------------------------------------------------//
 
-
-                int pos2 = getValidPosition(sc, p2);
-
-                System.out.println(pos2);
-
-                board.placeYourDraw(pos2, "player2"); //Prints out the playingboard + the position of "O".
+                board.placeYourDraw(p2); //Prints out the playingboard + the position of "O".
                 board.printOutPlayingBoard();
 
-                result = board.checkWinner(p1, p2);
+                result = board.checkWinner(p1.name, p2.name);
 
 
                 if (result.length() > 0) {
@@ -76,9 +69,9 @@ public class TicTacToe {
         }
     }
 
-    private static int getValidPosition(Scanner sc, String player) { //Denna metod tar in en scanner och kollar om player har skrivit in rätt symbol (1-9)
+    public static int getValidPosition(Scanner sc, String player) { //Denna metod tar in en scanner och kollar om player har skrivit in rätt symbol (1-9)
         boolean whileInvalid = true;
-       int pos = 0;
+        int pos = 0;
 
         System.out.print(player + " make your draw (1-9):");
         while (whileInvalid) {
