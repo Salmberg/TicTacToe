@@ -18,13 +18,51 @@ public class Board {
     }
 
 
-    public static void printOutPlayingBoard(char[][] playingBoard) { //This for loop prints out the playingboard
+    public void printOutPlayingBoard() { //This for loop prints out the playingboard
         for (char[] row : playingBoard) {
             for (char col : row) {
                 System.out.print(col);
-
             }
             System.out.println();
+        }
+    }
+
+//    public boolean isValidPosition(int selectPos, String symbol){
+//        return playingBoard[0][selectPos].equals(symbol);
+//    }
+
+    public char getPosition(int selectPos) {
+        switch (selectPos) {
+            case 1 -> {
+                return playingBoard[0][0];
+            }
+            case 2 -> {
+                return playingBoard[0][2];
+            }
+            case 3 -> {
+                return playingBoard[0][4];
+            }
+            case 4 -> {
+                return playingBoard[2][0];
+            }
+            case 5 -> {
+                return playingBoard[2][2];
+            }
+            case 6 -> {
+                return playingBoard[2][4];
+            }
+            case 7 -> {
+                return playingBoard[4][0];
+            }
+            case 8 -> {
+                return playingBoard[4][2];
+            }
+            case 9 -> {
+                return playingBoard[4][4];
+            }
+            default -> {
+                return 0;
+            }
         }
     }
 
