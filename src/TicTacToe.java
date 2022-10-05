@@ -44,11 +44,11 @@ public class TicTacToe {
                 board.placeYourDraw(pos1, "player1");// Prints out the playingboard + the chosen position of "X".
                 board.printOutPlayingBoard();
 
-                String result = board.checkWinner();
+                String result = board.checkWinner(p1, p2);
 
 
                 if (result.length() > 0) { //Om detta är sant så sätts boolen till true och då ska while-loopen sluta
-                    System.out.println(p1 + result);
+                    System.out.println(result);
                     break;
                 }
 
@@ -62,16 +62,16 @@ public class TicTacToe {
                 board.placeYourDraw(pos2, "player2"); //Prints out the playingboard + the position of "O".
                 board.printOutPlayingBoard();
 
-                result = board.checkWinner();
+                result = board.checkWinner(p1, p2);
 
 
                 if (result.length() > 0) {
-                    System.out.println(p2 + result);
+                    System.out.println(result);
                     break;
                 }
             }
             board.clearBoard();
-            System.out.println("Lets play again!");
+            System.out.println("Press Enter to play again!");
             sc.nextLine();
         }
     }

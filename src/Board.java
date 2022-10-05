@@ -9,7 +9,7 @@ public class Board {
 
     public char[][] playingBoard = fillPlayingBoard();
 
-    public  char[][] fillPlayingBoard() {
+    public char[][] fillPlayingBoard() {
         return new char[][]{{' ', '|', ' ', '|', ' '},
                 {'-', '+', '-', '+', '-'},
                 {' ', '|', ' ', '|', ' '},
@@ -33,41 +33,42 @@ public class Board {
         char symbol = ' ';
         char getCurrentPositionChar = getPosition(pos);
 
+
         if (user.equals("player1")) {
             symbol = 'X';
         } else if (user.equals("player2")) {
             symbol = 'O';
         }
-            if (Character.toString(getCurrentPositionChar).equals(" ")) { //Om den är tom går det att placera in X/O
+        if (Character.toString(getCurrentPositionChar).equals(" ")) { //Om den är tom går det att placera in X/O
 
-                //Lägger till X/O
-                if (user.equals("player1")) {
-                    p1Pos.add(pos);
-                } else if (user.equals("player2")) {
-                    p2Pos.add(pos);
-                }
-
-                //Placerar in X/O på respektive plats
-                switch (pos) {
-                    case 1 -> playingBoard[0][0] = symbol;
-                    case 2 -> playingBoard[0][2] = symbol;
-                    case 3 -> playingBoard[0][4] = symbol;
-                    case 4 -> playingBoard[2][0] = symbol;
-                    case 5 -> playingBoard[2][2] = symbol;
-                    case 6 -> playingBoard[2][4] = symbol;
-                    case 7 -> playingBoard[4][0] = symbol;
-                    case 8 -> playingBoard[4][2] = symbol;
-                    case 9 -> playingBoard[4][4] = symbol;
-                    default -> {
-                    }
-                }
-            } else {
-                System.out.println("Already taken, try again!:");
+            //Lägger till X/O
+            if (user.equals("player1")) {
+                p1Pos.add(pos);
+            } else if (user.equals("player2")) {
+                p2Pos.add(pos);
             }
+
+            //Placerar in X/O på respektive plats
+            switch (pos) {
+                case 1 -> playingBoard[0][0] = symbol;
+                case 2 -> playingBoard[0][2] = symbol;
+                case 3 -> playingBoard[0][4] = symbol;
+                case 4 -> playingBoard[2][0] = symbol;
+                case 5 -> playingBoard[2][2] = symbol;
+                case 6 -> playingBoard[2][4] = symbol;
+                case 7 -> playingBoard[4][0] = symbol;
+                case 8 -> playingBoard[4][2] = symbol;
+                case 9 -> playingBoard[4][4] = symbol;
+                default -> {
+                }
+            }
+        } else {
+            System.out.println("Already taken, try again!:");//return false/true
         }
+    }
 
 
-    public String checkWinner(){
+    public String checkWinner(String p1, String p2) {
         List firstRow = Arrays.asList(1, 2, 3);
         List secondRow = Arrays.asList(4, 5, 6);
         List thirdRow = Arrays.asList(7, 8, 9);
@@ -96,17 +97,18 @@ public class Board {
 //            System.out.println("List:: " + winning);
 
             if (p1Pos.containsAll(l)) {
-                return " you  won!";
+                return p1 + " you  won!";
             } else if (p2Pos.containsAll(l)) {
-                return " you won!";
+                return p2 + " you won!";
             }
-             if (p1Pos.size() + p2Pos.size() == 9) {
-                return "Its a tie!";
-             }
+        }
+        if (p1Pos.size() + p2Pos.size() == 9) {
+            return "Its a tie!";
         }
         return "";
     }
-    public void clearBoard(){
+
+    public void clearBoard() {
         p1Pos.clear();
         p2Pos.clear();
         playingBoard = fillPlayingBoard();
